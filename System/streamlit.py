@@ -20,6 +20,9 @@ st.set_page_config(
 # Define paths - Update these for your environment
 TOMATO_MODEL_PATH = 'models/Tomato_EfficientNetB0_finetuned_final.h5'
 WATERMELON_MODEL_PATH = 'models/Watermelon_MobileNetV2_final.h5'
+CONFUSION_MATRIX_PATH = 'models/confusion_matrix.png'
+WATERMELON_TRAINING_HISTORY = 'models/Watermelon_MobileNetV2_training_history.png'
+TOMATO_TRAINING_HISTORY = 'models/Tomato_EfficientNetB0_finetuned_training_history.png'
 
 # Configuration
 class Config:
@@ -123,31 +126,6 @@ class Config:
             'prevention': 'Implement proper sanitation and crop rotation.'
         }
     }
-
-    # Model training statistics (actual data from provided images)
-    TOMATO_TRAINING_DATA = {
-        'epochs': np.arange(5),
-        'train_accuracy': np.array([0.1000, 0.1025, 0.1035, 0.1000, 0.0965]),
-        'val_accuracy': np.array([0.1005, 0.0970, 0.0925, 0.1010, 0.1015]),
-        'train_loss': np.array([2.3025, 2.3030, 2.3040, 2.3035, 2.3025]),
-        'val_loss': np.array([2.3025, 2.3045, 2.3050, 2.3027, 2.3026])
-    }
-    
-    WATERMELON_TRAINING_DATA = {
-        'epochs': np.arange(5),
-        'train_accuracy': np.array([0.950, 0.965, 0.985, 0.992, 0.995]),
-        'val_accuracy': np.array([0.922, 0.910, 0.955, 0.920, 0.955]),
-        'train_loss': np.array([0.160, 0.100, 0.030, 0.020, 0.010]),
-        'val_loss': np.array([0.190, 0.200, 0.110, 0.210, 0.105])
-    }
-    
-    # Watermelon confusion matrix (from provided image)
-    WATERMELON_CONFUSION_MATRIX = np.array([
-        [155, 0, 0, 0],
-        [0, 379, 0, 1],
-        [0, 0, 203, 2],
-        [0, 38, 11, 363]
-    ])
 
 # Functions for image processing and prediction
 def load_and_preprocess_image(img):
@@ -339,29 +317,6 @@ def detection_page():
         # Upload image
         uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
         
-        # Sample images section
-        st.markdown("### Or try a sample image:")
-        sample_images = {
-            "tomato": {
-                "Healthy": "samples/tomato_healthy.jpg",
-                "Early Blight": "samples/tomato_early_blight.jpg",
-                "Late Blight": "samples/tomato_late_blight.jpg"
-            },
-            "watermelon": {
-                "Healthy": "samples/watermelon_healthy.jpg",
-                "Anthracnose": "samples/watermelon_anthracnose.jpg",
-                "Downy Mildew": "samples/watermelon_downy_mildew.jpg"
-            }
-        }
-        
-        sample_selection = st.selectbox(
-            "Select sample image",
-            list(sample_images[crop_type].keys()),
-            index=0
-        )
-        
-        use_sample = st.button("Use Sample Image")
-        
         # Add camera input option if supported
         camera_input = st.camera_input("Or take a photo")
         
@@ -498,8 +453,8 @@ def about_page():
     tab1, tab2 = st.tabs(["Tomato Model", "Watermelon Model"])
     
     with tab1:
-        # Display tomato model training history from image file
-        st.image("models/Tomato_EfficientNetB0_finetuned_training_history.png", use_column_width=True)
+        # Display tomato model training history
+        st.image(TOMATO_TRAINING_HISTORY, use_column_width=True)
             
         st.markdown("""
         ### Tomato Model Analysis
@@ -510,12 +465,12 @@ def about_page():
         """)
     
     with tab2:
-        # Display watermelon model training history from image file
-        st.image("models/Watermelon_MobileNetV2_finetuned_training_history.png", use_column_width=True)
+        # Display watermelon model training history
+        st.image(WATERMELON_TRAINING_HISTORY, use_column_width=True)
         
-        # Display confusion matrix for watermelon from image file
+        # Display confusion matrix for watermelon
         st.markdown("### Watermelon Model Confusion Matrix")
-        st.image("models/confusion_matrix.png", use_column_width=True)
+        st.image(CONFUSION_MATRIX_PATH, use_column_width=True)
         
         st.markdown("""
         ### Watermelon Model Analysis
