@@ -317,7 +317,13 @@ def detection_page():
         3. Make sure the leaf is well-lit and focused
         4. Wait for the analysis to complete
         """)
-
+    
+    st.markdown("---")
+    st.markdown("""
+    **Disclaimer:** This model is only trained to detect specific diseases in tomatoes and watermelons. 
+    It can only identify diseases it has been trained on and may not accurately diagnose diseases outside its training dataset. 
+    When you have a doubt, please consult with an agricultural expert.
+    """)
 # About the Model Page
 def about_model_page():
     st.title("About the Models")
