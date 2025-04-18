@@ -1,8 +1,13 @@
 # Core dependencies
-tensorflow==2.12.0  # This version has better Python compatibility
+tensorflow==2.15.0
+tensorflow-estimator==2.15.0
+tensorflow-intel==2.15.0
+tensorflow-io-gcs-filesystem==0.31.0
+termcolor==3.0.1
+tf_nightly==2.20.0.dev20250413
 numpy>=1.22.0,<1.25.0
-opencv-python-headless==4.8.0.74
-pillow>=9.0.0
+opencv-python==4.11.0.86
+pillow==11.2.1
 matplotlib>=3.5.0
 
 # Streamlit and UI
