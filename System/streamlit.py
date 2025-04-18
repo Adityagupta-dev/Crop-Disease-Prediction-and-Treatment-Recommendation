@@ -276,8 +276,8 @@ def main():
         # In a real application, you would load the trained models
         # Here we'll assume the models are in a specific location
         MODEL_PATHS = {
-            "tomato": "models/Tomato_ResNet50_final.h5",
-            "watermelon": "models/Watermelon_MobileNetV2_final.h5"
+            "tomato": "models\Tomato_EfficientNetB0_finetuned_final.h5",
+            "watermelon": "models\Watermelon_MobileNetV2_finetuned_final.h5"
         }
         
         # Select crop type
