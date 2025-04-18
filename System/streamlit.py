@@ -241,7 +241,7 @@ def home_page():
     st.title("Plant Disease Detection System")
     
     # Add a banner image
-    st.image("https://via.placeholder.com/800x300?text=Plant+Disease+Detection+System", use_column_width=True)
+    st.image("models/Head image.jpg", use_column_width=True)
     
     st.markdown("""
     ## Welcome to the Plant Disease Detection Tool
