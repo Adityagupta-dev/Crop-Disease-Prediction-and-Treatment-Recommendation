@@ -275,43 +275,48 @@ def detection_page():
     # Crop selection
     crop_type = st.radio("Select Plant Type:", ("tomato", "watermelon"))
     
-    # Image upload
-    uploaded_file = st.file_uploader("Upload an image...", type=['jpg', 'jpeg', 'png'])
+    # Create columns for upload and instructions
+    col1, col2 = st.columns(2)
     
-    if uploaded_file is not None:
-        # Display a spinner while processing
-        with st.spinner("Processing image..."):
-            # Preprocess the image
-            original_img, preprocessed_img = preprocess_image(uploaded_file)
-            
-            if original_img is not None and preprocessed_img is not None:
-                # Load appropriate model
-                try:
-                    model_path = TOMATO_MODEL_PATH if crop_type == 'tomato' else WATERMELON_MODEL_PATH
-                    model = load_model(model_path)
-                    
-                    # Get class names based on crop type
-                    class_names = Config.TOMATO_CLASSES if crop_type == 'tomato' else Config.WATERMELON_CLASSES
-                    
-                    # Make prediction
-                    predicted_class, confidence, top_predictions = predict_disease(model, preprocessed_img, class_names)
-                    
-                    # Get treatment recommendation
-                    treatment_info = get_treatment_recommendation(predicted_class, crop_type)
-                    
-                    # Display results
-                    display_results(original_img, predicted_class, confidence, top_predictions, treatment_info)
-                    
-                except Exception as e:
-                    st.error(f"Error loading model or making prediction: {str(e)}")
-        with col2:
-            st.markdown("""
-            ### Instructions:
-            1. Select the crop type (tomato or watermelon)
-            2. Upload a clear image of the plant leaf
-            3. Make sure the leaf is well-lit and focused
-            4. Wait for the analysis to complete
-            """)
+    with col1:
+        # Image upload
+        uploaded_file = st.file_uploader("Upload an image...", type=['jpg', 'jpeg', 'png'])
+        
+        if uploaded_file is not None:
+            # Display a spinner while processing
+            with st.spinner("Processing image..."):
+                # Preprocess the image
+                original_img, preprocessed_img = preprocess_image(uploaded_file)
+                
+                if original_img is not None and preprocessed_img is not None:
+                    # Load appropriate model
+                    try:
+                        model_path = TOMATO_MODEL_PATH if crop_type == 'tomato' else WATERMELON_MODEL_PATH
+                        model = load_model(model_path)
+                        
+                        # Get class names based on crop type
+                        class_names = Config.TOMATO_CLASSES if crop_type == 'tomato' else Config.WATERMELON_CLASSES
+                        
+                        # Make prediction
+                        predicted_class, confidence, top_predictions = predict_disease(model, preprocessed_img, class_names)
+                        
+                        # Get treatment recommendation
+                        treatment_info = get_treatment_recommendation(predicted_class, crop_type)
+                        
+                        # Display results
+                        display_results(original_img, predicted_class, confidence, top_predictions, treatment_info)
+                        
+                    except Exception as e:
+                        st.error(f"Error loading model or making prediction: {str(e)}")
+    
+    with col2:
+        st.markdown("""
+        ### Instructions:
+        1. Select the crop type (tomato or watermelon)
+        2. Upload a clear image of the plant leaf
+        3. Make sure the leaf is well-lit and focused
+        4. Wait for the analysis to complete
+        """)
 
 # About the Model Page
 def about_model_page():
@@ -431,7 +436,6 @@ def help_guide_page():
     For support, feature requests, or collaboration:
     
     - **LinkedIn**: [Aditya Gupta](https://www.linkedin.com/in/aditya-gupta-062478250)
-    - **Email**: contact@example.com (example placeholder)
     """)
     
 # Main app
