@@ -498,34 +498,8 @@ def about_page():
     tab1, tab2 = st.tabs(["Tomato Model", "Watermelon Model"])
     
     with tab1:
-        col1, col2 = st.columns(2)
-        with col1:
-            # Display tomato model training accuracy from actual data
-            tomato_data = Config.TOMATO_TRAINING_DATA
-            
-            fig, ax = plt.subplots(figsize=(8, 6))
-            ax.plot(tomato_data['epochs'], tomato_data['train_accuracy'], label='Training Accuracy', color='blue')
-            ax.plot(tomato_data['epochs'], tomato_data['val_accuracy'], label='Validation Accuracy', color='orange')
-            ax.set_xlabel('Epoch')
-            ax.set_ylabel('Accuracy')
-            ax.set_title('Tomato_EfficientNetB0_finetuned Accuracy')
-            ax.legend()
-            ax.grid(True)
-            
-            st.pyplot(fig)
-        
-        with col2:
-            # Display tomato model training loss from actual data
-            fig, ax = plt.subplots(figsize=(8, 6))
-            ax.plot(tomato_data['epochs'], tomato_data['train_loss'], label='Training Loss', color='blue')
-            ax.plot(tomato_data['epochs'], tomato_data['val_loss'], label='Validation Loss', color='orange')
-            ax.set_xlabel('Epoch')
-            ax.set_ylabel('Loss')
-            ax.set_title('Tomato_EfficientNetB0_finetuned Loss')
-            ax.legend()
-            ax.grid(True)
-            
-            st.pyplot(fig)
+        # Display tomato model training history from image file
+        st.image("models/Tomato_EfficientNetB0_finetuned_training_history.png", use_column_width=True)
             
         st.markdown("""
         ### Tomato Model Analysis
@@ -536,66 +510,12 @@ def about_page():
         """)
     
     with tab2:
-        col1, col2 = st.columns(2)
-        with col1:
-            # Display watermelon model training accuracy from actual data
-            watermelon_data = Config.WATERMELON_TRAINING_DATA
-            
-            fig, ax = plt.subplots(figsize=(8, 6))
-            ax.plot(watermelon_data['epochs'], watermelon_data['train_accuracy'], label='Training Accuracy', color='blue')
-            ax.plot(watermelon_data['epochs'], watermelon_data['val_accuracy'], label='Validation Accuracy', color='orange')
-            ax.set_xlabel('Epoch')
-            ax.set_ylabel('Accuracy')
-            ax.set_title('Watermelon_MobileNetV2_finetuned Accuracy')
-            ax.legend()
-            ax.grid(True)
-            
-            st.pyplot(fig)
+        # Display watermelon model training history from image file
+        st.image("models/Watermelon_MobileNetV2_finetuned_training_history.png", use_column_width=True)
         
-        with col2:
-            # Display watermelon model training loss from actual data
-            fig, ax = plt.subplots(figsize=(8, 6))
-            ax.plot(watermelon_data['epochs'], watermelon_data['train_loss'], label='Training Loss', color='blue')
-            ax.plot(watermelon_data['epochs'], watermelon_data['val_loss'], label='Validation Loss', color='orange')
-            ax.set_xlabel('Epoch')
-            ax.set_ylabel('Loss')
-            ax.set_title('Watermelon_MobileNetV2_finetuned Loss')
-            ax.legend()
-            ax.grid(True)
-            
-            st.pyplot(fig)
-        
-        # Display confusion matrix for watermelon
+        # Display confusion matrix for watermelon from image file
         st.markdown("### Watermelon Model Confusion Matrix")
-        
-        watermelon_cm = Config.WATERMELON_CONFUSION_MATRIX
-        classes = Config.WATERMELON_CLASSES
-        
-        fig, ax = plt.subplots(figsize=(10, 8))
-        cax = ax.matshow(watermelon_cm, cmap='Blues')
-        fig.colorbar(cax)
-        
-        # Set class names on axes
-        ax.set_xticks(np.arange(len(classes)))
-        ax.set_yticks(np.arange(len(classes)))
-        ax.set_xticklabels(classes)
-        ax.set_yticklabels(classes)
-        
-        # Label ticks on x-axis
-        plt.setp(ax.get_xticklabels(), rotation=45, ha="left", rotation_mode="anchor")
-        
-        # Add text annotations
-        for i in range(len(classes)):
-            for j in range(len(classes)):
-                if watermelon_cm[i, j] > 200:  # Highlight high values
-                    ax.text(j, i, str(watermelon_cm[i, j]), va='center', ha='center', color='white')
-                else:
-                    ax.text(j, i, str(watermelon_cm[i, j]), va='center', ha='center')
-        
-        ax.set_title("Confusion Matrix")
-        plt.tight_layout()
-        
-        st.pyplot(fig)
+        st.image("models/confusion_matrix.png", use_column_width=True)
         
         st.markdown("""
         ### Watermelon Model Analysis
@@ -648,21 +568,6 @@ def help_page():
     - **Minimum Resolution**: 224 x 224 pixels (higher is better)
     - **File Size**: Less than 5MB
     """)
-    
-    # Add side-by-side examples
-    st.markdown("### Examples of Good vs. Poor Quality Images")
-    
-    good_col, bad_col = st.columns(2)
-    
-    with good_col:
-        st.markdown("#### ✅ Good Example")
-        st.image("/api/placeholder/400/300", use_column_width=True)
-        st.caption("Clear focus, good lighting, disease symptoms visible")
-    
-    with bad_col:
-        st.markdown("#### ❌ Poor Example")
-        st.image("/api/placeholder/400/300", use_column_width=True)
-        st.caption("Blurry, poor lighting, multiple plants in frame")
     
     # FAQ section
     st.markdown("---")
@@ -755,3 +660,7 @@ def help_page():
     
     - **LinkedIn**: www.linkedin.com/in/aditya-gupta-062478250
     """)
+
+# Main app execution
+page_function = sidebar_menu()
+page_function()
