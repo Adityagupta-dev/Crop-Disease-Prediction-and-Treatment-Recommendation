@@ -286,9 +286,6 @@ def home_page():
         Get started by navigating to the **Disease Detection** page from the sidebar.
         """)
     
-    with col2:
-        st.image("/api/placeholder/400/320", use_column_width=True)
-    
     # Stats section
     st.markdown("---")
     st.markdown("### Model Capabilities")
