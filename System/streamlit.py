@@ -705,8 +705,9 @@ def help_page():
         3. Consider consulting with local agricultural experts for specific advice
         4. Follow local regulations regarding pesticide usage
         """)
+        
     st.subheader("Contact Support")
-        st.markdown("""
+    st.markdown("""
         For additional help or to report issues with the system, please contact:
         
         - **LinkdenIn**: www.linkedin.com/in/aditya-gupta-062478250
