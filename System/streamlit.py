@@ -266,21 +266,6 @@ def home_page():
     
     """)
     
-    st.markdown("---")
-    
-    # Sample images row
-    st.subheader("Sample Disease Images")
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.image("https://via.placeholder.com/300x300?text=Tomato+Early+Blight", caption="Tomato Early Blight")
-    
-    with col2:
-        st.image("https://via.placeholder.com/300x300?text=Tomato+Late+Blight", caption="Tomato Late Blight")
-    
-    with col3:
-        st.image("https://via.placeholder.com/300x300?text=Watermelon+Downy+Mildew", caption="Watermelon Downy Mildew")
-
 # Disease Detection Page
 def detection_page():
     st.title("Plant Disease Detection")
@@ -319,16 +304,6 @@ def detection_page():
                     
                 except Exception as e:
                     st.error(f"Error loading model or making prediction: {str(e)}")
-    else:
-        # Display placeholder instructions when no image is uploaded
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            if crop_type == "tomato":
-                st.image("https://via.placeholder.com/400x300?text=Upload+Tomato+Leaf+Image", use_column_width=True)
-            else:
-                st.image("https://via.placeholder.com/400x300?text=Upload+Watermelon+Leaf+Image", use_column_width=True)
-        
         with col2:
             st.markdown("""
             ### Instructions:
@@ -459,18 +434,6 @@ def help_guide_page():
     - **Email**: contact@example.com (example placeholder)
     """)
     
-    # Add a feedback form
-    st.subheader("Feedback")
-    
-    with st.form("feedback_form"):
-        name = st.text_input("Name")
-        email = st.text_input("Email")
-        feedback = st.text_area("Your Feedback")
-        submit_button = st.form_submit_button("Submit Feedback")
-        
-        if submit_button:
-            st.success("Thank you for your feedback! We'll review it soon.")
-
 # Main app
 def main():
     st.set_page_config(
