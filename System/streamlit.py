@@ -19,7 +19,7 @@ st.set_page_config(
 
 # Define paths - Update these for your environment
 TOMATO_MODEL_PATH = 'models/Tomato_EfficientNetB0_finetuned_final.h5'
-WATERMELON_MODEL_PATH = 'models/Watermelon_MobileNetV2_finetuned_final.h5'
+WATERMELON_MODEL_PATH = 'models/Watermelon_MobileNetV2_final.h5'
 
 # Configuration
 class Config:
