@@ -705,14 +705,53 @@ def help_page():
         3. Consider consulting with local agricultural experts for specific advice
         4. Follow local regulations regarding pesticide usage
         """)
+    
+    with st.expander("What diseases can the system detect?"):
+        st.markdown("""
+        #### Tomato Diseases:
+        - **Tomato Mosaic Virus**: Mottled light and dark green on leaves, distorted leaves
+        - **Target Spot**: Brown circular lesions with concentric rings
+        - **Bacterial Spot**: Small, dark, water-soaked spots on leaves and fruits
+        - **Tomato Yellow Leaf Curl Virus**: Yellowing and upward curling of leaves
+        - **Late Blight**: Dark brown spots with pale green borders, white fungal growth
+        - **Leaf Mold**: Pale green or yellow patches on upper leaf surfaces, olive-green to grayish-purple mold on undersides
+        - **Early Blight**: Dark brown spots with concentric rings, yellow areas around spots
+        - **Spider Mites**: Tiny yellow or white speckles on upper leaf surfaces, fine webbing
+        - **Septoria Leaf Spot**: Small, circular spots with dark borders and light centers
         
-    st.subheader("Contact Support")
-    st.markdown("""
-        For additional help or to report issues with the system, please contact:
-        
-        - **LinkdenIn**: www.linkedin.com/in/aditya-gupta-062478250
+        #### Watermelon Diseases:
+        - **Anthracnose**: Sunken, water-soaked lesions that become dark and expand
+        - **Downy Mildew**: Yellow to brown angular spots on upper leaf surfaces, grayish-purple fungal growth underneath
+        - **Mosaic Virus**: Mottled light and dark green patterns, leaf distortion and stunting
         """)
-
-# Run the app
-if __name__ == "__main__":
-    main()
+    
+    # Image interpretation guide
+    st.markdown("---")
+    st.markdown("## Understanding Detection Results")
+    
+    st.markdown("""
+    ### Reading the Result Screen
+    
+    After processing your image, the system will display:
+    
+    1. **Detected Disease**: The most likely disease affecting your plant
+    2. **Confidence Score**: How certain the model is about the detection (higher is better)
+    3. **Probability Distribution**: Bar chart showing top possible diseases
+    4. **Treatment Recommendations**: Suggested products and application instructions
+    
+    ### Confidence Levels
+    
+    - **>90%**: Very high confidence - Treatment can be considered
+    - **70-90%**: Good confidence - Consider additional verification
+    - **<70%**: Lower confidence - Take additional photos or consult an expert
+    """)
+    
+    # Contact information
+    st.markdown("---")
+    st.markdown("## Need More Help?")
+    
+    st.markdown("""
+    If you encounter any issues or have questions about using this system:
+    
+    - **LinkedIn**: www.linkedin.com/in/aditya-gupta-062478250
+    """)
